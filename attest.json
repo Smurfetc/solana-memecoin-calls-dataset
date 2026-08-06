@@ -1,0 +1,18 @@
+{
+ "sha256": "2cc72d8f0a8473d392ae5c51a8317ace4751c761dc704f70daa9a3592eac3a3a",
+ "calls": 3172,
+ "stamped_at": 1786026341,
+ "stamped_utc": "2026-08-06T14:25:41Z",
+ "receipts": [
+  {
+   "calendar": "https://a.pool.opentimestamps.org",
+   "file": "calls-a.ots",
+   "bytes": 172
+  },
+  {
+   "calendar": "https://b.pool.opentimestamps.org",
+   "file": "calls-b.ots",
+   "bytes": 205
+  }
+ ]
+}

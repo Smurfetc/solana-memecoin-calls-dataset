@@ -1,0 +1,106 @@
+# Solana memecoin calls — a public record with the misses left in
+
+**3,172 pump.fun token calls**, each with the market cap we called it at, the peak it reached
+afterwards, and the exact second it was posted publicly. The whole file is hashed and the hash is
+anchored in a Bitcoin block, so no row can be added, edited or back-dated after the fact.
+
+Every trading channel publishes its winners. This is the same feed with the **losers still in it** —
+about six calls in ten never double, and they are all here.
+
+Live version and full methodology: **[smugcalls.com](https://smugcalls.com)** ·
+dataset page: **[smugcalls.com/data.html](https://smugcalls.com/data.html)**
+
+---
+
+## What's in the numbers
+
+| | |
+|---|---|
+| Calls | 3,172 |
+| Period | 2026-06-30 → 2026-08-06 |
+| Median market cap at call time | **$10,651** |
+| Reached 2x | 38.8% |
+| Reached 3x | 23.6% |
+| Reached 5x | 12.2% |
+| Reached 10x | 5.3% |
+| Reached 100x | 0.3% |
+| Median peak | 1.65x |
+| Largest | CATE — called at $21K, peaked at $87.8M (**4,167x**) |
+
+The low entry cap is the point: these are calls made on the bonding curve, before migration, not
+after a chart has already moved.
+
+## Schema
+
+One JSON object per line (JSON Lines, UTF-8).
+
+| field | type | meaning |
+|---|---|---|
+| `mint` | string | Token mint address on Solana (base58). Primary key of the row. |
+| `sym` | string | Ticker as it appeared on pump.fun at call time. |
+| `t` | integer | Unix timestamp of the call, in seconds. |
+| `utc` | string | The same instant in ISO-8601 UTC, for convenience. |
+| `mc` | number | Market cap in USD at the moment of the call — the entry reference. |
+| `peak` | number | Highest multiple reached **after** the call, relative to `mc`. Ratchet: never revised down. |
+| `tg` | integer | Message number in the public channel — `t.me/SmugCalls/<tg>`. |
+
+```json
+{"mc": 21077, "mint": "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump", "peak": 4167.35, "sym": "CATE", "t": 1785083184, "tg": 4448, "utc": "2026-07-26T16:26:24Z"}
+```
+
+## Verify it yourself
+
+The file is only worth something if you can check it, so here is how.
+
+```bash
+# 1. hash the dataset — must equal "sha256" in attest.json
+sha256sum calls.jsonl
+
+# 2. confirm the hash is anchored in Bitcoin (needs `pip install opentimestamps-client`)
+ots verify calls-a.ots
+ots verify calls-b.ots
+```
+
+Or run the bundled checker, which does both and explains what it found:
+
+```bash
+python3 verify.py
+```
+
+`calls-a.ots` and `calls-b.ots` are OpenTimestamps receipts from two independent calendars. They
+prove the exact byte content of `calls.jsonl` existed at the stamped moment. A call cannot be
+inserted afterwards without changing the hash and invalidating both receipts.
+
+Every row is independently checkable too: take `mint`, open it on any Solana chart, and compare
+against `mc` and `t`.
+
+## How `peak` is measured
+
+`peak` is the highest market cap reached **after** the call divided by the market cap **at** the
+call. Deliberately excluded: anything that happened before the call — a launch bundle that spiked
+the price seconds before we posted is not our result and does not count. Post-migration highs do
+count, since the token keeps trading.
+
+It is a ratchet: it can rise as a token keeps running, never fall back. That makes it an honest
+ceiling, not a running price.
+
+## What this is not
+
+**A peak is not a payout.** `peak` says the token traded there — not that anyone sold there, and
+certainly not that you would have. Roughly nine of ten tokens that doubled later fell back below
+where they peaked, and plenty went to zero afterwards. Read the file as a record of what happened,
+not as a promise of what you would have made.
+
+This is not financial advice, and it is not a claim that these numbers are reachable by anyone.
+
+## Where it comes from
+
+[SmugCalls](https://smugcalls.com) is a fully automated caller: it watches Solana on-chain activity,
+posts to a public Telegram channel the moment its filters fire, and publishes this dataset from the
+same database that drives the channel. Nothing is curated by hand — including the failures.
+
+Channel: [t.me/SmugCalls](https://t.me/SmugCalls) · X: [@SmugDeg](https://x.com/SmugDeg)
+
+## License
+
+[CC0 1.0](LICENSE) — public domain. Use it, republish it, build on it, no attribution required.
