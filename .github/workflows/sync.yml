@@ -1,0 +1,76 @@
+name: Sync dataset from smugcalls.com
+
+# Датасет на сайте пересобирается и заново заверяется каждую ночь, а зеркала стояли —
+# за три дня они разошлись на 307 записей. Тянем свежий файл сюда сами: так на боевом
+# сервере не нужно хранить ключи от GitHub, а публикуется только то, что сошлось с хэшем
+# из квитанции.
+
+on:
+  schedule:
+    - cron: "37 5 * * *"    # после ночного заверения (оно проходит около 04:10 UTC)
+  workflow_dispatch:         # и кнопкой, когда нужно немедленно
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the published dataset
+        run: |
+          set -eu
+          for f in calls.jsonl attest.json calls-a.ots calls-b.ots; do
+            curl -fsSL --http1.1 --retry 5 --retry-delay 3 -o "$f" "https://smugcalls.com/$f"
+          done
+          ls -l calls.jsonl attest.json
+
+      - name: Refuse to publish anything the receipt does not cover
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, sys
+          digest = hashlib.sha256(open("calls.jsonl", "rb").read()).hexdigest()
+          attested = json.load(open("attest.json"))["sha256"]
+          print("file    :", digest)
+          print("attested:", attested)
+          if digest != attested:
+              sys.exit("hash mismatch — the download does not match its attestation, refusing")
+          print("match — safe to publish")
+          PY
+
+      - name: Recompute the numbers in the README
+        run: python3 tools/refresh_readme.py
+
+      - name: Commit if anything changed
+        run: |
+          set -eu
+          git config user.name "smugcalls-sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "sync: dataset as published on $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Mirror to Hugging Face
+        # шаг молча пропускается, пока в секретах репозитория нет HF_TOKEN
+        if: ${{ env.HF_TOKEN != '' }}
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -eu
+          pip install --quiet huggingface_hub
+          python3 - <<'PY'
+          import os
+          from huggingface_hub import HfApi
+          api = HfApi(token=os.environ["HF_TOKEN"])
+          for f in ("calls.jsonl", "attest.json", "calls-a.ots", "calls-b.ots", "README.md"):
+              api.upload_file(path_or_fileobj=f, path_in_repo=f,
+                              repo_id="Smurfetc/solana-memecoin-calls", repo_type="dataset",
+                              commit_message="sync from smugcalls.com")
+          print("mirrored to Hugging Face")
+          PY
