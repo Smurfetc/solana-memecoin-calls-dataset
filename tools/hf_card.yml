@@ -1,0 +1,17 @@
+license: cc0-1.0
+pretty_name: Solana Memecoin Calls (misses included)
+language:
+- en
+size_categories:
+- 1K<n<10K
+tags:
+- solana
+- memecoin
+- pumpfun
+- crypto
+- trading
+- finance
+- timestamped
+configs:
+- config_name: default
+  data_files: calls.jsonl

@@ -64,13 +64,22 @@ jobs:
         run: |
           set -eu
           pip install --quiet huggingface_hub
+          python3 tools/build_hf_card.py
           python3 - <<'PY'
           import os
           from huggingface_hub import HfApi
           api = HfApi(token=os.environ["HF_TOKEN"])
-          for f in ("calls.jsonl", "attest.json", "calls-a.ots", "calls-b.ots", "README.md"):
-              api.upload_file(path_or_fileobj=f, path_in_repo=f,
+          for local, remote in (("calls.jsonl", "calls.jsonl"),
+                                ("attest.json", "attest.json"),
+                                ("calls-a.ots", "calls-a.ots"),
+                                ("calls-b.ots", "calls-b.ots"),
+                                ("verify.py", "verify.py"),
+                                ("README_hf.md", "README.md")):
+              api.upload_file(path_or_fileobj=local, path_in_repo=remote,
                               repo_id="Smurfetc/solana-memecoin-calls", repo_type="dataset",
                               commit_message="sync from smugcalls.com")
-          print("mirrored to Hugging Face")
+          info = api.dataset_info("Smurfetc/solana-memecoin-calls")
+          if not info.card_data:
+              raise SystemExit("card metadata is empty after upload — header was lost")
+          print("mirrored to Hugging Face, card metadata intact")
           PY
