@@ -74,6 +74,16 @@ inserted afterwards without changing the hash and invalidating both receipts.
 Every row is independently checkable too: take `mint`, open it on any Solana chart, and compare
 against `mc` and `t`.
 
+## Check a single call without downloading anything
+
+The file is browsable in a table right in the browser — search, sort, filter:
+
+**[open the dataset viewer](https://huggingface.co/datasets/Smurfetc/solana-memecoin-calls/viewer/default/train)**
+
+Type a ticker into the search box, take the `mint` from the row, paste it into any Solana
+chart and compare against `mc` and `t`. That is the entire verification loop, and it takes
+about ten seconds. Start with `CATE` — the largest call in the file.
+
 ## How `peak` is measured
 
 `peak` is the highest market cap reached **after** the call divided by the market cap **at** the
