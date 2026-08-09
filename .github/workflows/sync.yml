@@ -16,6 +16,8 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -59,8 +61,6 @@ jobs:
       - name: Mirror to Hugging Face
         # шаг молча пропускается, пока в секретах репозитория нет HF_TOKEN
         if: ${{ env.HF_TOKEN != '' }}
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           set -eu
           pip install --quiet huggingface_hub
