@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solana memecoin calls — an open dataset with the misses left in</title>
+<meta name="description" content="3,544 pump.fun token calls with entry market cap, peak multiple and the exact second each was posted. Hash anchored in Bitcoin. CC0.">
+<link rel="canonical" href="https://smurfetc.github.io/solana-memecoin-calls-dataset/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Solana memecoin calls — an open dataset with the misses left in">
+<meta property="og:description" content="3,544 pump.fun calls, entry cap and peak for each, losers included. Hash anchored in Bitcoin. CC0.">
+<meta property="og:url" content="https://smurfetc.github.io/solana-memecoin-calls-dataset/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Solana memecoin calls (pump.fun) with outcomes",
+  "description": "3,544 pump.fun token calls published on a public Telegram channel, each with the USD market cap at call time, the highest multiple reached afterwards, and the exact publication timestamp. Unprofitable calls are included. The file hash is anchored in a Bitcoin block via OpenTimestamps.",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "creator": {"@type": "Organization", "name": "SmugCalls", "url": "https://smugcalls.com"},
+  "url": "https://smugcalls.com/data.html",
+  "keywords": ["solana", "memecoin", "pump.fun", "trading signals", "cryptocurrency", "bonding curve"],
+  "distribution": [{
+    "@type": "DataDownload",
+    "encodingFormat": "application/x-ndjson",
+    "contentUrl": "https://smugcalls.com/calls.jsonl"
+  }],
+  "temporalCoverage": "2026-06-30/2026-08-10",
+  "isAccessibleForFree": true
+}
+</script>
+<style>
+  :root{
+    --swamp:#0B120E; --swamp2:#131c16; --paper:#EDE6D4; --dim:#8b9a8d;
+    --acid:#C6F24A; --rekt:#E4443A; --gold:#C9A227; --line:#26332a;
+    --bg:var(--swamp); --fg:var(--paper); --card:var(--swamp2);
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#F2F0E6; --fg:#16221a; --card:#fffdf6; --line:#d9d5c2; --dim:#5c6b5e; }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:44rem; margin:0 auto; padding:3rem 1.25rem 5rem}
+  .eyebrow{color:var(--dim); text-transform:uppercase; letter-spacing:.14em; font-size:.72rem; margin:0 0 1rem}
+  h1{font-size:clamp(1.7rem,5vw,2.6rem); line-height:1.12; margin:0 0 1rem; text-wrap:balance; letter-spacing:-.01em}
+  h2{font-size:1.05rem; margin:2.8rem 0 .9rem; text-transform:uppercase; letter-spacing:.1em; color:var(--acid)}
+  @media (prefers-color-scheme: light){ h2{color:#4e6b12} }
+  p{margin:0 0 1rem}
+  a{color:inherit; text-underline-offset:3px; text-decoration-thickness:1px}
+  a:hover{color:var(--acid)}
+  @media (prefers-color-scheme: light){ a:hover{color:#4e6b12} }
+  .lede{font-size:1.05rem; color:var(--fg)}
+  .dim{color:var(--dim)}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(9rem,1fr)); gap:.75rem; margin:1.5rem 0}
+  .cell{background:var(--card); border:1px solid var(--line); border-radius:2px; padding:.85rem .9rem}
+  .cell b{display:block; font-size:1.5rem; line-height:1.2; font-variant-numeric:tabular-nums}
+  .cell span{display:block; color:var(--dim); font-size:.75rem; margin-top:.2rem}
+  .win b{color:var(--acid)} .loss b{color:var(--rekt)}
+  @media (prefers-color-scheme: light){ .win b{color:#4e6b12} }
+  table{width:100%; border-collapse:collapse; font-size:.85rem; margin:1rem 0}
+  th,td{text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top}
+  th{color:var(--dim); font-weight:400; text-transform:uppercase; font-size:.7rem; letter-spacing:.08em}
+  td code{color:var(--gold)}
+  .scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
+  pre{background:var(--card); border:1px solid var(--line); border-radius:2px; padding:.9rem 1rem; overflow-x:auto; font-size:.82rem; margin:1rem 0}
+  pre .c{color:var(--dim)}
+  .seal{border:1px solid var(--gold); border-radius:2px; padding:1rem 1.1rem; margin:1.5rem 0; background:var(--card)}
+  .seal b{color:var(--gold)}
+  ul{padding-left:1.1rem; margin:0 0 1rem}
+  li{margin:.35rem 0}
+  footer{margin-top:3.5rem; padding-top:1.5rem; border-top:1px solid var(--line); color:var(--dim); font-size:.82rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Open data · CC0 · updated daily</p>
+  <h1>Every call we made, including the ones that went nowhere</h1>
+
+  <p class="lede">A public channel calls pump.fun tokens. This is its complete record: <b>3,544 calls</b>,
+  each with the market cap it was called at, the highest multiple it reached afterwards, and the exact
+  second it was posted. About six calls in ten never double — those are in the file too.</p>
+
+  <p class="dim">Most published track records are a screenshot of the winners. The point of this one is
+  that it cannot be edited after the fact: the file is hashed, and the hash sits in a Bitcoin block.</p>
+
+  <div class="grid">
+    <div class="cell win"><b>39.0%</b><span>reached 2×</span></div>
+    <div class="cell win"><b>5.2%</b><span>reached 10×</span></div>
+    <div class="cell loss"><b>61%</b><span>never doubled</span></div>
+    <div class="cell"><b>$10,741</b><span>median entry cap</span></div>
+  </div>
+
+  <p>The low entry cap is the whole point: calls are made on the bonding curve, before migration —
+  not after a chart has already moved. The largest so far is CATE, called at $21,077 and peaked at
+  <b>4,167×</b>.</p>
+
+  <h2>What one row looks like</h2>
+
+  <div class="scroll">
+  <table>
+    <tr><th>field</th><th>meaning</th></tr>
+    <tr><td><code>mint</code></td><td>Token mint address on Solana (base58)</td></tr>
+    <tr><td><code>sym</code></td><td>Ticker as it appeared on pump.fun at call time</td></tr>
+    <tr><td><code>t</code> · <code>utc</code></td><td>Publication time — unix seconds and ISO-8601</td></tr>
+    <tr><td><code>mc</code></td><td>Market cap in USD at the moment of the call — the entry reference</td></tr>
+    <tr><td><code>peak</code></td><td>Highest multiple reached <b>after</b> the call. Ratchet: never revised down</td></tr>
+    <tr><td><code>tg</code></td><td>Message number in the public channel, so any row can be traced back</td></tr>
+  </table>
+  </div>
+
+  <pre>{"mc": 21077, "mint": "Ai66LHZG9MCzg1WKdawwqduVAXpNDUuV8M3uyq5ppump",
+ "peak": 4167.35, "sym": "CATE", "t": 1785083184, "tg": 4448,
+ "utc": "2026-07-26T16:26:24Z"}</pre>
+
+  <h2>Check it before you believe it</h2>
+
+  <p>Three commands. The first two prove the file has not been touched since it was stamped; the third
+  lets you pick any row and look it up on-chain yourself.</p>
+
+  <pre><span class="c"># hash the file — must equal "sha256" in attest.json</span>
+sha256sum calls.jsonl
+
+<span class="c"># confirm that hash is anchored in a Bitcoin block</span>
+ots verify calls-a.ots
+
+<span class="c"># recompute every number claimed in the README, from the file</span>
+python3 verify.py</pre>
+
+  <div class="seal">
+    <p style="margin:0"><b>Why the Bitcoin stamp matters.</b> A trading record is only evidence if it
+    cannot grow a winner in hindsight. Adding, editing or back-dating a single row changes the hash,
+    and the old hash is already in a block — nobody can move it, including us.</p>
+  </div>
+
+  <h2>What this is not</h2>
+  <ul>
+    <li><b>Not a profit record.</b> <code>peak</code> says the token reached that multiple, not that
+    anyone sold there. Peak on a chart and money in a pocket are different things.</li>
+    <li><b>Not survivorship-filtered.</b> Calls that went to zero stay in the file at the multiple they
+    actually reached.</li>
+    <li><b>Not advice.</b> It is a measurement of what happened, published so it can be argued with.</li>
+  </ul>
+
+  <h2>Where the data comes from</h2>
+  <p>The calls are published live on a Telegram channel; the file is rebuilt and re-stamped every night.
+  Methodology, the live version of these numbers and the research built on the same feed are on the
+  site:</p>
+  <ul>
+    <li><a href="https://smugcalls.com">smugcalls.com</a> — live record, updated hourly</li>
+    <li><a href="https://smugcalls.com/data.html">smugcalls.com/data.html</a> — dataset page, full field-by-field methodology</li>
+    <li><a href="https://smugcalls.com/pumpfun-graduation-rate.html">How many pump.fun launches actually graduate?</a>
+      — 825,123 launches measured over 30 days, and why published estimates disagree by 13×</li>
+  </ul>
+
+  <h2>Get the file</h2>
+  <ul>
+    <li><a href="https://github.com/Smurfetc/solana-memecoin-calls-dataset">GitHub</a> — this repository, with <code>verify.py</code> and the OpenTimestamps receipts</li>
+    <li><a href="https://huggingface.co/datasets/Smurfetc/solana-memecoin-calls">Hugging Face</a> — same file, plus a table viewer you can search in the browser without downloading</li>
+    <li><a href="https://smugcalls.com/calls.jsonl">calls.jsonl</a> — straight from the source</li>
+  </ul>
+
+  <footer>
+    Released under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a> — public
+    domain, no attribution required. Mirrors are synchronised from
+    <a href="https://smugcalls.com">smugcalls.com</a> daily and refuse to publish if the hash does not
+    match the attestation.
+  </footer>
+
+</div>
+</body>
+</html>
