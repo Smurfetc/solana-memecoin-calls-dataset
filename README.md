@@ -10,6 +10,9 @@ about six calls in ten never double, and they are all here.
 Live version and full methodology: **[smugcalls.com](https://smugcalls.com)** ·
 dataset page: **[smugcalls.com/data.html](https://smugcalls.com/data.html)**
 
+New here? The short version — what the record is, why the losing calls are in it, and how to
+disprove it in three commands: **[smurfetc.github.io/solana-memecoin-calls-dataset](https://smurfetc.github.io/solana-memecoin-calls-dataset/)**
+
 ---
 
 ## What's in the numbers
