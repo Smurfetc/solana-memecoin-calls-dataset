@@ -10,6 +10,10 @@ about six calls in ten never double, and they are all here.
 Live version and full methodology: **[smugcalls.com](https://smugcalls.com)** ·
 dataset page: **[smugcalls.com/data.html](https://smugcalls.com/data.html)**
 
+Built on the same feed: **[How many pump.fun launches actually graduate?](https://smugcalls.com/pumpfun-graduation-rate.html)**
+— 825,123 launches measured over 30 days, with every denominator spelled out. Published estimates
+range from 0.2% to 6% because each one silently counts something different.
+
 New here? The short version — what the record is, why the losing calls are in it, and how to
 disprove it in three commands: **[smurfetc.github.io/solana-memecoin-calls-dataset](https://smurfetc.github.io/solana-memecoin-calls-dataset/)**
 
