@@ -118,6 +118,15 @@ same database that drives the channel. Nothing is curated by hand — including 
 
 Channel: [t.me/SmugCalls](https://t.me/SmugCalls) · X: [@SmugDeg](https://x.com/SmugDeg)
 
+## Fresher data
+
+This file is a periodic snapshot. The same record delivered every morning — plus the fields kept
+out of the public file (peaks re-verified against post-migration exchange prices, a flag for calls
+that only cleared 2x because SOL moved under them, late flexes, observation-window completeness) —
+runs $20/month, with a keyed endpoint and webhooks at $100:
+[smugcalls.com/data-api.html](https://smugcalls.com/data-api.html?s=gh).
+The historical file in this repo stays free and CC0 either way.
+
 ## License
 
 [CC0 1.0](LICENSE) — public domain. Use it, republish it, build on it, no attribution required.
