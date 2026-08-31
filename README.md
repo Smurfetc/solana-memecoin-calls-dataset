@@ -1,6 +1,6 @@
 # Solana memecoin calls — a public record with the misses left in
 
-**5,866 pump.fun token calls**, each with the market cap we called it at, the peak it reached
+**5,958 pump.fun token calls**, each with the market cap we called it at, the peak it reached
 afterwards, and the exact second it was posted publicly. The whole file is hashed and the hash is
 anchored in a Bitcoin block, so no row can be added, edited or back-dated after the fact.
 
@@ -23,16 +23,16 @@ disprove it in three commands: **[smurfetc.github.io/solana-memecoin-calls-datas
 
 | | |
 |---|---|
-| Calls | 5,866 |
-| Period | 2026-06-30 → 2026-08-30 |
-| Median market cap at call time | **$11,569** |
-| Reached 2x | 38.6% |
-| Reached 3x | 23.7% |
-| Reached 5x | 12.1% |
-| Reached 10x | 5.2% |
+| Calls | 5,958 |
+| Period | 2026-06-30 → 2026-08-31 |
+| Median market cap at call time | **$11,630** |
+| Reached 2x | 36.4% |
+| Reached 3x | 22.6% |
+| Reached 5x | 11.8% |
+| Reached 10x | 5.1% |
 | Reached 100x | 0.3% |
-| Median peak | 1.63x |
-| Largest | CATE — called at $21,077, peaked **4,566x** |
+| Median peak | 1.61x |
+| Largest | CATE — called at $21,077, peaked **4,520x** |
 
 The low entry cap is the point: these are calls made on the bonding curve, before migration, not
 after a chart has already moved.
