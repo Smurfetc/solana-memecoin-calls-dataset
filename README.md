@@ -1,6 +1,6 @@
 # Solana memecoin calls — a public record with the misses left in
 
-**6,408 pump.fun token calls**, each with the market cap we called it at, the peak it reached
+**6,481 pump.fun token calls**, each with the market cap we called it at, the peak it reached
 afterwards, and the exact second it was posted publicly. The whole file is hashed and the hash is
 anchored in a Bitcoin block, so no row can be added, edited or back-dated after the fact.
 
@@ -23,11 +23,11 @@ disprove it in three commands: **[smurfetc.github.io/solana-memecoin-calls-datas
 
 | | |
 |---|---|
-| Calls | 6,408 |
-| Period | 2026-06-30 → 2026-09-04 |
-| Median market cap at call time | **$11,953** |
+| Calls | 6,481 |
+| Period | 2026-06-30 → 2026-09-05 |
+| Median market cap at call time | **$11,955** |
 | Reached 2x | 35.9% |
-| Reached 3x | 22.5% |
+| Reached 3x | 22.4% |
 | Reached 5x | 11.8% |
 | Reached 10x | 5.1% |
 | Reached 100x | 0.3% |
