@@ -14,6 +14,8 @@ Built on the same feed: **[How many pump.fun launches actually graduate?](https:
 — 825,123 launches measured over 30 days, with every denominator spelled out. Published estimates
 range from 0.2% to 6% because each one silently counts something different.
 
+One section of that note re-analyses a third-party dataset, used under CC-BY: Kamat, A. U. (2026). *RED-PUMP-2026-v1: A public benchmark of 860,213 pump.fun token launches with survival outcomes (May–June 2026 regime)*. Zenodo. [doi.org/10.5281/zenodo.20633486](https://doi.org/10.5281/zenodo.20633486) (ORCID 0009-0000-4781-312X); companion paper [arXiv:2607.02823](https://arxiv.org/abs/2607.02823). The note was written against v1 of that paper — judge the dataset by its current version. No rows, columns or derived fields from RED-PUMP are in this repository; it was used only in the note.
+
 New here? The short version — what the record is, why the losing calls are in it, and how to
 disprove it in three commands: **[smurfetc.github.io/solana-memecoin-calls-dataset](https://smurfetc.github.io/solana-memecoin-calls-dataset/)**
 
