@@ -1,18 +1,13 @@
 {
- "sha256": "b8d772a6c026b5747f8f09deb7ba873f344ae6d41f14f264bcef14203837fb64",
- "calls": 11583,
- "stamped_at": 1793765401,
- "stamped_utc": "2026-11-04T04:10:01Z",
+ "sha256": "614d702f7b6df7e61fe7101fe51d62576057aca389c63f989272b80f41aa12cd",
+ "calls": 11683,
+ "stamped_at": 1793851801,
+ "stamped_utc": "2026-11-05T04:10:01Z",
  "receipts": [
   {
    "calendar": "https://a.pool.opentimestamps.org",
    "file": "calls-a.ots",
-   "bytes": 277
-  },
-  {
-   "calendar": "https://b.pool.opentimestamps.org",
-   "file": "calls-b.ots",
-   "bytes": 240
+   "bytes": 207
   }
  ]
 }
